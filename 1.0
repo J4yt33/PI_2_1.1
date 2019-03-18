@@ -1,3 +1,10 @@
+/*
+Das Programm liest einzelne Zeichen ein und reserviert nach jeden Zeichen neuen Speicher fuer ein weiteres Zeichen.
+Dies passiert solange bis das letzte eingegebene Zeichen Enter war.
+
+Die eingelesenen Zeichenketten werden danach wieder ausgegeben und der Speicher wieder frei gemacht
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
