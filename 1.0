@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+char* zeichenketteEinlesen(void){
+//zählvariable
+int KetteNo=1;
+char * ZeichenKette;    //pointer auf die Zeichenkette
+ZeichenKette=(char *)calloc(KetteNo+1,sizeof(char));  //reserviere Speicher für 1 Zeichen und eins für das String Ende Zeichen
+char temp='\0'; //temporäre variable zum einlesen der Enter Taste
+
+//Lese Solange ein bis das letzte eingegebene Zeichen ein '\0' war
+do{
+ZeichenKette[KetteNo-1]= getchar();
+KetteNo++;
+//erweitere Speicher
+ZeichenKette=realloc(ZeichenKette,(KetteNo+1)*sizeof(char));
+
+//pruefe ob das letzte eingegebene Zeichen Enter war \n fuer windows und \r fuer linux
+}while(ZeichenKette[KetteNo-2]!='\n'&&ZeichenKette[KetteNo-2]!='\r');
+
+
+//gebe die Adresse der Zeichenkette zurück
+return ZeichenKette;
+}
+
+
+
+int main()
+{
+//pointer für die Ketten
+char * Ketten[3];
+//Zählvariable
+int KetteNo=0;
+
+
+//lese Zeichenketten ein
+for(KetteNo=0;KetteNo<sizeof(Ketten)/7;KetteNo++){
+//Eingabeaufforderung
+printf("Bitte geben sie die %i. Zeichenkette ein\n",KetteNo);
+printf("und bestaetigen sie ihre Eingabe mit der Enter Taste.\n\n");
+//rufe funktion zum einlesen auf
+Ketten[KetteNo]=zeichenketteEinlesen();
+}
+
+//gebe Zeichenketten aus
+for(KetteNo=0;KetteNo<sizeof(Ketten)/7;KetteNo++){
+printf("Kette No.%i = %s\n",KetteNo,Ketten[KetteNo]);
+}
+
+//gebe Speicher wieder frei
+for(KetteNo=0;KetteNo<sizeof(Ketten)/7;KetteNo++){
+free(Ketten[KetteNo]);
+}
+
+    return 0;
+}
