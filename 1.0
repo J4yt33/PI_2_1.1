@@ -1,33 +1,41 @@
-/*  -Das Programm liest einzelne Zeichen ein bis zur Eingabe der Entertaste und speichert diese.
-    -Nach jedem Zeichen wird der Speicher um eins erhoeht
-    -Die einzelnen Zeichenketten werden nach dem einlesen wieder ausgegeben und der Speicher wieder frei gemacht
-*/
-
-
-
-
-
 #include <stdio.h>
 #include <stdlib.h>
 
 
 char* zeichenketteEinlesen(void){
-//zählvariable
-int KetteNo=1;
-char * ZeichenKette;    //pointer auf die Zeichenkette
-ZeichenKette=(char *)calloc(KetteNo+1,sizeof(char));  //reserviere Speicher für 1 Zeichen und eins für das String Ende Zeichen
-char temp='\0'; //temporäre variable zum einlesen der Enter Taste
+int KetteNo=1;          //zählvariable
+char * ZeichenKette='NULL';    //pointer auf die Zeichenkette
 
-//Lese Solange ein bis das letzte eingegebene Zeichen ein '\0' war
+ZeichenKette=(char *)calloc(KetteNo,sizeof(char));  //reserviere Speicher für 1 Zeichen und eins für das String Ende Zeichen und initialisiere direkt mit 0
+
+//pruefe ob Speicher erfolgreich reserviert wurde
+if(ZeichenKette=='NULL'){
+printf("Der Speicher konnte nicht reserviert werden.\n");
+printf("Bitte bestaetigen sie mit der EnterTaste\n");
+scanf("%c",&KetteNo);
+return;
+}
+
+//Lese Solange ein bis das letzte eingegebene Zeichen Enter war war
 do{
-ZeichenKette[KetteNo-1]= getchar();
-KetteNo++;
 //erweitere Speicher
 ZeichenKette=realloc(ZeichenKette,(KetteNo+1)*sizeof(char));
 
-//pruefe ob das letzte eingegebene Zeichen Enter war \n fuer windows und \r fuer linux
-}while(ZeichenKette[KetteNo-2]!='\n'&&ZeichenKette[KetteNo-2]!='\r');
+//pruefe ob Speicher erfolgreich reserviert wurde
+if(ZeichenKette=='NULL'){
+printf("Der Speicher konnte nicht reserviert werden.\n");
+printf("Bitte bestaetigen sie mit der EnterTaste\n");
+scanf("%c",&KetteNo);
+return;
+}
 
+//lese Zeichen ein
+ZeichenKette[KetteNo-1]= getchar();
+//Zaehle ein Zeichen hoch
+KetteNo++;
+
+//pruefe ob das letzte eingegebene Zeichen Enter war
+}while(ZeichenKette[KetteNo-2]!='\n'&&ZeichenKette[KetteNo-2]!='\r');
 
 //gebe die Adresse der Zeichenkette zurück
 return ZeichenKette;
@@ -37,30 +45,26 @@ return ZeichenKette;
 
 int main()
 {
-//pointer für die Ketten
-char * Ketten[3];
-//Zählvariable
-int KetteNo=0;
-
+char * ZeichenKetten[3];    //pointer für die ZeichenKetten
+int KetteNo=0;              //Zählvariable
 
 //lese Zeichenketten ein
-for(KetteNo=0;KetteNo<sizeof(Ketten)/7;KetteNo++){
+for(KetteNo=0;KetteNo<sizeof(ZeichenKetten)/7;KetteNo++){
 //Eingabeaufforderung
 printf("Bitte geben sie die %i. Zeichenkette ein\n",KetteNo);
 printf("und bestaetigen sie ihre Eingabe mit der Enter Taste.\n\n");
 //rufe funktion zum einlesen auf
-Ketten[KetteNo]=zeichenketteEinlesen();
+ZeichenKetten[KetteNo]=zeichenketteEinlesen();
 }
 
 //gebe Zeichenketten aus
-for(KetteNo=0;KetteNo<sizeof(Ketten)/7;KetteNo++){
-printf("Kette No.%i = %s\n",KetteNo,Ketten[KetteNo]);
+for(KetteNo=0;KetteNo<sizeof(ZeichenKetten)/7;KetteNo++){
+printf("Kette No.%i = %s\n",KetteNo,ZeichenKetten[KetteNo]);
 }
 
 //gebe Speicher wieder frei
-for(KetteNo=0;KetteNo<sizeof(Ketten)/7;KetteNo++){
-free(Ketten[KetteNo]);
+for(KetteNo=0;KetteNo<sizeof(ZeichenKetten)/7;KetteNo++){
+free(ZeichenKetten[KetteNo]);
 }
-
     return 0;
 }
