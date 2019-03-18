@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
+//funktion zum einlesen der Zeichenketten und erweitern des speichers
 char* zeichenketteEinlesen(void){
 int KetteNo=1;          //zählvariable
 char * ZeichenKette='NULL';    //pointer auf die Zeichenkette
