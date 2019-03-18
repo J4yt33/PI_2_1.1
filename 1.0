@@ -1,3 +1,12 @@
+/*  -Das Programm liest einzelne Zeichen ein bis zur Eingabe der Entertaste und speichert diese.
+    -Nach jedem Zeichen wird der Speicher um eins erhoeht
+    -Die einzelnen Zeichenketten werden nach dem einlesen wieder ausgegeben und der Speicher wieder frei gemacht
+*/
+
+
+
+
+
 #include <stdio.h>
 #include <stdlib.h>
 
