@@ -3,7 +3,16 @@ Das Programm liest einzelne Zeichen ein und reserviert nach jeden Zeichen neuen 
 Dies passiert solange bis das letzte eingegebene Zeichen Enter war.
 
 Die eingelesenen Zeichenketten werden danach wieder ausgegeben und der Speicher wieder frei gemacht
+
+Jan Taschbach, 11075552
+Sven Fuchs,
+
 */
+
+//Anzahl der einzulesenden Zeichenketten
+#define AnzahlZK 3  //optional ausklammern
+
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,13 +22,18 @@ char* zeichenketteEinlesen(void){
 int ZeichenNo=1;          //zählvariable
 char * ZeichenKette='NULL';    //pointer auf die Zeichenkette
 
-ZeichenKette=(char *)calloc(ZeichenNo,sizeof(char));  //reserviere Speicher für 1 Zeichen und eins für das String Ende Zeichen und initialisiere direkt mit 0
+ZeichenKette=(char *)calloc(ZeichenNo+2,sizeof(char));  //reserviere Speicher für 1 Zeichen und eins für das String
+//                                                Ende Zeichen und eins für den möglichweweise bei windows nötigen cr
+//                                                          und initialisiere direkt mit 0
 
 //pruefe ob Speicher erfolgreich reserviert wurde
 if(ZeichenKette=='NULL'){
+//eingabeaufforderung
 printf("Der Speicher konnte nicht reserviert werden.\n");
 printf("Bitte bestaetigen sie mit der EnterTaste\n");
+//lese enter Zeichen in irgendeinen zur verfügung stehenden speicher
 scanf("%c",&ZeichenNo);
+//kehre zurück zu dem punkt von wo die funktion aufgerufen wurde, in diesem Fall -> main() direkt hinter den Aufruf der Funktion
 return;
 }
 
@@ -28,11 +42,15 @@ do{
 //erweitere Speicher
 ZeichenKette=realloc(ZeichenKette,(ZeichenNo+1)*sizeof(char));
 
+
 //pruefe ob Speicher erfolgreich reserviert wurde
 if(ZeichenKette=='NULL'){
+//eingabeaufforderung
 printf("Der Speicher konnte nicht reserviert werden.\n");
 printf("Bitte bestaetigen sie mit der EnterTaste\n");
+//lese enter Zeichen in irgendeinen zur verfügung stehenden speicher
 scanf("%c",&ZeichenNo);
+//kehre zurück zu dem punkt von wo die funktion aufgerufen wurde, in diesem Fall -> main() direkt hinter den Aufruf der Funktion
 return;
 }
 
@@ -52,7 +70,30 @@ return ZeichenKette;
 
 int main()
 {
-char * ZeichenKetten[3];    //pointer für die ZeichenKetten
+int AnzahlZk = -1;
+AnzahlZk= AnzahlZK; //ANzahl der Zeichenketten
+char temp='0'; //temporäre variable zum einlesen der enter taste
+char Eingabe='0';//variable zum einlesen der Eingabe
+
+//eingabeaufforderung
+printf("Die aktuelle Zeichenzahl ist %i moechten sie aendern?\n\nDrücken sie Enter fuer weiter und e zum aendern.\n",AnzahlZk);
+Eingabe=getchar();
+if(Eingabe=='e'){
+//einlesen von enter in temp
+temp=getchar();
+}
+
+//int AnzahlZK =2;
+if (Eingabe=='e'){
+do{
+printf("Bitte geben sie die neue Anzahl ein und bestaetigen sie ihre Eingabe mit der Entertaste.\n:");
+scanf("%i",&AnzahlZk);
+//bei ungueltiger eingabe
+if(AnzahlZk<0)printf("\n\nungueltige Eingabe\n\nGeben sie eine Zahl groeßer 0 ein\n\nMit 0 wird koennen sie das Programm beenden\n\n");
+}while(AnzahlZk<0);
+}
+
+char * ZeichenKetten[AnzahlZk];    //pointer für die ZeichenKetten
 int KetteNo=0;              //Zählvariable
 
 //lese Zeichenketten ein
