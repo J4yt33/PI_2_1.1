@@ -40,7 +40,7 @@ return;
 //Lese Solange ein bis das letzte eingegebene Zeichen Enter war war
 do{
 //erweitere Speicher
-ZeichenKette=realloc(ZeichenKette,(ZeichenNo+1)*sizeof(char));
+ZeichenKette=realloc(ZeichenKette,(ZeichenNo)*sizeof(char));
 
 
 //pruefe ob Speicher erfolgreich reserviert wurde
@@ -88,6 +88,8 @@ if (Eingabe=='e'){
 do{
 printf("Bitte geben sie die neue Anzahl ein und bestaetigen sie ihre Eingabe mit der Entertaste.\n:");
 scanf("%i",&AnzahlZk);
+//einlesen von enter in temp
+temp=getchar();
 //bei ungueltiger eingabe
 if(AnzahlZk<0)printf("\n\nungueltige Eingabe\n\nGeben sie eine Zahl groeßer 0 ein\n\nMit 0 wird koennen sie das Programm beenden\n\n");
 }while(AnzahlZk<0);
