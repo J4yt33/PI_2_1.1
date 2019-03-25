@@ -76,7 +76,7 @@ char temp='0'; //temporäre variable zum einlesen der enter taste
 char Eingabe='0';//variable zum einlesen der Eingabe
 
 //eingabeaufforderung
-printf("Die aktuelle Zeichenzahl ist %i moechten sie aendern?\n\nDrücken sie Enter fuer weiter und e zum aendern.\n",AnzahlZk);
+printf("Die aktuelle Anzahl Zeichenketten ist %i moechten sie aendern?\n\nDrücken sie Enter fuer weiter und e zum aendern.\n",AnzahlZk);
 Eingabe=getchar();
 if(Eingabe=='e'){
 //einlesen von enter in temp
